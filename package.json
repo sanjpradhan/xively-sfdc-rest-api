@@ -1,0 +1,24 @@
+{
+  "name": "xively-sfdc-rest-api",
+  "version": "1.0.0",
+  "description": "Xively and Salesforce REST API",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sanjpradhan/xively-sfdc-rest-api.git"
+  },
+  "author": "Sanjay Pradhan",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sanjpradhan/xively-sfdc-rest-api/issues"
+  },
+  "homepage": "https://github.com/sanjpradhan/xively-sfdc-rest-api#readme",
+  "dependencies": {
+    "body-parser": "^1.14.1",
+    "express": "^4.13.3",
+    "nforce": "^1.2.3"
+  }
+}

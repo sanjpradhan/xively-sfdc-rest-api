@@ -49,15 +49,20 @@ router.get('/api/:account/:id', function(req, res, next) {
     org.query({ query: "Select Id, Name, StageName, Amount, Probability From Opportunity where AccountId = '" + req.params.id + "'"}),
     function(account, contacts, opportunities) {
         //res.render('show', { record: account, contacts: contacts.records, opps: opportunities.records });
-        console.log(account);
-        console.log(contacts.records);
-        console.log(opportunities.records);
-        console.log('done');
-
-        //res.write('{' + account + '}');
-        //res.write('{' + contacts.records  + '}');
-        //res.write('{' + opportunities.records + '}');
-        //res.end();
+        //console.log(account);
+        //console.log(contacts.records);
+        //console.log(opportunities.records);
+        //console.log('done');
+      //res.writeHead(200, { 'Content-Type': 'application/json', "Access-Control-Allow-Origin":"*" });
+      //res.write(JSON.stringify(account, 0, 4));
+      //res.write(JSON.stringify(contacts, 0, 4));
+      //res.write(JSON.stringify(opportunities, 0, 4));
+      //res.end();
+        res.writeHead(200, { 'Content-Type': 'application/json', "Access-Control-Allow-Origin":"*" });
+        res.write(JSON.stringify(account));
+        res.write(JSON.stringify(contacts.records));
+        res.write(JSON.stringify(opportunities.records));
+        res.end();
     });
 });
 

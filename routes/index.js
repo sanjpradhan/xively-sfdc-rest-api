@@ -42,16 +42,19 @@ router.post('/', function(req, res, next) {
 /* SKP: REST API FOR Record  */
 router.get('/api/account/:id', function(req, res, next) {
   // query for record, contacts and opportunities
+  console.log('ABOUT TO QUERY : ' + req.params.id);
   Promise.join(
     org.getRecord({ type: 'account', id: req.params.id }),
     org.query({ query: "Select Id, Name, Email, Title, Phone From Contact where AccountId = '" + req.params.id + "'"}),
     org.query({ query: "Select Id, Name, StageName, Amount, Probability From Opportunity where AccountId = '" + req.params.id + "'"}),
     function(account, contacts, opportunities) {
-        //res.render('show', { record: account, contacts: contacts.records, opps: opportunities.records });
-        res.write('{' + account + '}');
-        res.write('{' + contacts.records  + '}');
-        res.write('{' + opportunities.records + '}');
-        res.end();
+        res.render('show', { record: account, contacts: contacts.records, opps: opportunities.records });
+
+
+        //res.write('{' + account + '}');
+        //res.write('{' + contacts.records  + '}');
+        //res.write('{' + opportunities.records + '}');
+        //res.end();
     });
 });
 

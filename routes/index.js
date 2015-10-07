@@ -58,10 +58,9 @@ router.get('/api/:account/:id', function(req, res, next) {
       //res.write(JSON.stringify(contacts, 0, 4));
       //res.write(JSON.stringify(opportunities, 0, 4));
       //res.end();
-        res.writeHead(200, { 'Content-Type': 'application/json', "Access-Control-Allow-Origin":"*" });
-        res.write(JSON.stringify(account));
-        res.write(JSON.stringify(contacts.records));
-        res.write(JSON.stringify(opportunities.records));
+        res.write('{ Account : ' + JSON.stringify(account , 0 ,4) + '}');
+        res.write('{' + JSON.stringify(contacts.records,0,4)  + '}');
+        res.write('{' + JSON.stringify(opportunities.records,0,4) + '}');
         res.end();
     });
 });

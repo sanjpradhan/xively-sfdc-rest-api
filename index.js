@@ -118,7 +118,7 @@ app.get('/api/accounts', function(req, res) {
 
 app.get('/api/accounts/:id', function(req, res) {
   
-  var resp = '{SKP_ParamID:' + req.params.id + '}';
+  var resp = req.params.id ;
 
   console.log(req.params);
   res.writeHead(200, { 'Content-Type': 'application/json', "Access-Control-Allow-Origin":"*" });

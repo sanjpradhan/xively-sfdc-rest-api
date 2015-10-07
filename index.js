@@ -117,7 +117,10 @@ app.get('/api/accounts', function(req, res) {
 /* Record detail page */
 
 app.get('/api/accounts/:id', function(req, res) {
+  
+  console.log(req);
   // query for record, contacts and opportunities
+  /*
   Promise.join(
     org.getRecord({ type: 'account', id: req.params.id }),
     org.query({ query: "Select Id, Name, Email, Title, Phone From Contact where AccountId = '" + req.params.id + "'"}),
@@ -133,6 +136,7 @@ app.get('/api/accounts/:id', function(req, res) {
 
 
     });  
+    */
     /*
     function(account, contacts, opportunities) {
         res.render('show', { record: account, contacts: contacts.records, opps: opportunities.records });

@@ -58,9 +58,9 @@ router.get('/api/:account/:id', function(req, res, next) {
       //res.write(JSON.stringify(contacts, 0, 4));
       //res.write(JSON.stringify(opportunities, 0, 4));
       //res.end();
-        res.write('{ Account : ' + JSON.stringify(account , 0 ,4) + '}');
-        res.write('{' + JSON.stringify(contacts.records,0,4)  + '}');
-        res.write('{' + JSON.stringify(opportunities.records,0,4) + '}');
+        res.write('{ account : ' + JSON.stringify(account , 0 ,4) + '}');
+        res.write('{ contacts :' + JSON.stringify(contacts.records,0,4)  + '}');
+        res.write('{ opportunities :' + JSON.stringify(opportunities.records,0,4) + '}');
         res.end();
     });
 });

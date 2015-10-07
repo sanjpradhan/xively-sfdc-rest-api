@@ -48,8 +48,11 @@ router.get('/api/account/:id', function(req, res, next) {
     org.query({ query: "Select Id, Name, Email, Title, Phone From Contact where AccountId = '" + req.params.id + "'"}),
     org.query({ query: "Select Id, Name, StageName, Amount, Probability From Opportunity where AccountId = '" + req.params.id + "'"}),
     function(account, contacts, opportunities) {
-        res.render('show', { record: account, contacts: contacts.records, opps: opportunities.records });
-
+        //res.render('show', { record: account, contacts: contacts.records, opps: opportunities.records });
+        console.log(account);
+        console.log(contacts);
+        console.log(opportunities);
+        console.log('done');
 
         //res.write('{' + account + '}');
         //res.write('{' + contacts.records  + '}');

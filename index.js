@@ -63,7 +63,6 @@ app.get('/api/providers', function(req, res) {
         res.write(JSON.stringify(resp, 0, 4));
         res.end();
       }
-    }
   });
 
 });

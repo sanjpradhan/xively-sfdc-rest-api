@@ -121,7 +121,9 @@ app.get('/api/accounts/:id', function(req, res) {
 
 
   console.log('SKP:: ParamID Is', req.params.id);
-  res.end;
+  res.writeHead(200, { 'Content-Type': 'application/json', "Access-Control-Allow-Origin":"*" });
+  res.write(JSON.stringify(res, 0, 4));
+  res.end();
   // query for record, contacts and opportunities
   /*
   Promise.join(

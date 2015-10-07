@@ -116,19 +116,23 @@ app.get('/api/accounts', function(req, res) {
 
 /* Record detail page */
 
-app.get('/api/accounts/:id', function(req, res) {
+app.get('/api/accounts/:id', function(req, res, next) {
   
   var resp = req.params.id ;
 
   console.log(req.params);
-
+  // query for record, contacts and opportunities
   Promise.join(
-      org.getRecord({ type: 'account', id: req.params.id }),
-      org.query({ query: "Select Id, Name, Email, Title, Phone From Contact where AccountId = '" + req.params.id + "'"}),
-      function(account , contacts){
-          console.log('SANJAY WE GOT IT!!!!!!');
-          res.end;
-      });
+    org.getRecord({ type: 'account', id: req.params.id }),
+    org.query({ query: "Select Id, Name, Email, Title, Phone From Contact where AccountId = '" + req.params.id + "'"}),
+    org.query({ query: "Select Id, Name, StageName, Amount, Probability From Opportunity where AccountId = '" + req.params.id + "'"}),
+    function(account, contacts, opportunities) {
+        //res.render('show', { record: account, contacts: contacts.records, opps: opportunities.records });
+        console.log('ALL DONE!!!!');
+        res.end();
+    });
+
+
 
 
   // query for record, contacts and opportunities

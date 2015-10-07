@@ -121,10 +121,16 @@ app.get('/api/accounts/:id', function(req, res) {
   var resp = req.params.id ;
 
   console.log(req.params);
-  res.writeHead(200, { 'Content-Type': 'application/json', "Access-Control-Allow-Origin":"*" });
-  res.write(JSON.stringify(resp, 0, 4));
-   res.write(JSON.stringify('Sanjay', 0, 4));
-  res.end();
+
+  Promise.join(
+      org.getRecord({ type: 'account', id: req.params.id }),
+      org.query({ query: "Select Id, Name, Email, Title, Phone From Contact where AccountId = '" + req.params.id + "'"}),
+      function(account , contacts){
+          console.log('SANJAY WE GOT IT!!!!!!');
+          res.end;
+      });
+
+
   // query for record, contacts and opportunities
   /*
   Promise.join(

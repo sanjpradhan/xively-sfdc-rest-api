@@ -122,7 +122,7 @@ app.get('/api/accounts/:id', function(req, res) {
     org.getRecord({ type: 'account', id: req.params.id }),
     org.query({ query: "Select Id, Name, Email, Title, Phone From Contact where AccountId = '" + req.params.id + "'"}),
     org.query({ query: "Select Id, Name, StageName, Amount, Probability From Opportunity where AccountId = '" + req.params.id + "'"}),
-    function(account, contacts,opportunities)  {}
+    function(account, contacts,opportunities)  {
       res.writeHead(200, { 'Content-Type': 'application/json', "Access-Control-Allow-Origin":"*" });
       res.write(JSON.stringify(resp, 0, 4));
       res.end();

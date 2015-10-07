@@ -123,7 +123,7 @@ app.get('/api/accounts/:id', function(req, res) {
   console.log(req.params);
   res.writeHead(200, { 'Content-Type': 'application/json', "Access-Control-Allow-Origin":"*" });
   res.write(JSON.stringify(resp, 0, 4));
-   res.write(JSON.stringify("Sanjay", 0, 4));
+   res.write(JSON.stringify('Sanjay', 0, 4));
   res.end();
   // query for record, contacts and opportunities
   /*

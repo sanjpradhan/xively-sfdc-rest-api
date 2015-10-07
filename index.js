@@ -123,11 +123,15 @@ app.get('/api/accounts/:id', function(req, res) {
     org.query({ query: "Select Id, Name, Email, Title, Phone From Contact where AccountId = '" + req.params.id + "'"}),
     org.query({ query: "Select Id, Name, StageName, Amount, Probability From Opportunity where AccountId = '" + req.params.id + "'"}),
     function(account, contacts,opportunities)  {
-      res.writeHead(200, { 'Content-Type': 'application/json', "Access-Control-Allow-Origin":"*" });
-      res.write(JSON.stringify(account, 0, 4));
-      res.write(JSON.stringify(contacts, 0, 4));
-      res.write(JSON.stringify(opportunities, 0, 4));
-      res.end();
+      //res.writeHead(200, { 'Content-Type': 'application/json', "Access-Control-Allow-Origin":"*" });
+      //res.write(JSON.stringify(account, 0, 4));
+      //res.write(JSON.stringify(contacts, 0, 4));
+      //res.write(JSON.stringify(opportunities, 0, 4));
+      //res.end();
+
+      console.log('SKP: Response is:' , res);
+
+
     });  
     /*
     function(account, contacts, opportunities) {

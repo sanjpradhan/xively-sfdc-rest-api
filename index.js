@@ -4,6 +4,7 @@ var nforce = require('nforce');
 
 
 
+var Promise = require("bluebird");
 var util = require('util')
 var async = require('async')
  
@@ -109,3 +110,28 @@ app.get('/api/accounts', function(req, res) {
   });
 
 });
+
+
+
+
+/* Record detail page */
+
+app.get('/api/accounts/:id', function(req, res) {
+  // query for record, contacts and opportunities
+  Promise.join(
+    org.getRecord({ type: 'account', id: req.params.id }),
+    org.query({ query: "Select Id, Name, Email, Title, Phone From Contact where AccountId = '" + req.params.id + "'"}),
+    org.query({ query: "Select Id, Name, StageName, Amount, Probability From Opportunity where AccountId = '" + req.params.id + "'"}),
+       res.writeHead(200, { 'Content-Type': 'application/json', "Access-Control-Allow-Origin":"*" });
+      res.write(JSON.stringify(resp, 0, 4));
+      res.end();
+    /*
+    function(account, contacts, opportunities) {
+        res.render('show', { record: account, contacts: contacts.records, opps: opportunities.records });
+    });
+   */
+});
+
+
+
+

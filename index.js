@@ -120,7 +120,7 @@ app.get('/api/accounts/:id', function(req, res) {
   
 
 
-  console.log('SKP:: ParamID Is'req.params.id);
+  console.log('SKP:: ParamID Is', req.params.id);
   res.end;
   // query for record, contacts and opportunities
   /*

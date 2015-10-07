@@ -40,7 +40,7 @@ router.post('/', function(req, res, next) {
 
 
 /* SKP: REST API FOR Record  */
-router.get('/api/account/:id', function(req, res, next) {
+router.get('/:api/:account/:id', function(req, res, next) {
   // query for record, contacts and opportunities
   console.log('ABOUT TO QUERY : ' + req.params.id);
   Promise.join(

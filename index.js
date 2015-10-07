@@ -2,8 +2,8 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var nforce = require('nforce');
 
+//will need to break this down a bit more
 
-var routes = require('routes')
 var util = require('util')
 var async = require('async')
  
@@ -41,7 +41,7 @@ org.authenticate({ username: process.env.USERNAME, password: process.env.PASSWOR
   if(err) {
     console.log('Salesforce Error: ' + err.message);
   } else {
-    console.log('Salesforce Access Token: ' + resp.access_token);
+    console.log('Validated Salesforce Access Token: ' + resp.access_token);
     oauth = resp;
   }
 });
@@ -56,9 +56,14 @@ app.get('/api/providers', function(req, res) {
 
   org.query({ query: q, oauth: oauth }, function(err, resp) {
     //console.log(resp.records);
-    res.writeHead(200, { 'Content-Type': 'application/json', "Access-Control-Allow-Origin":"*" });
-    res.write(JSON.stringify(resp, 0, 4));
-    res.end();
+      if(err){
+        console.log('/api/providers had an Error', err);
+      }else{
+        res.writeHead(200, { 'Content-Type': 'application/json', "Access-Control-Allow-Origin":"*" });
+        res.write(JSON.stringify(resp, 0, 4));
+        res.end();
+      }
+    }
   });
 
 });
@@ -94,9 +99,13 @@ app.get('/api/accounts', function(req, res) {
   var q = "SELECT AccountNumber,AccountSource,Active__c,AnnualRevenue,BillingAddress,BillingCity,BillingCountry,BillingLatitude,BillingLongitude,BillingPostalCode,BillingState,BillingStreet,CleanStatus,CreatedById,CreatedDate,CustomerPriority__c,DandbCompanyId,Description,DunsNumber,Fax,Id,Industry,IsCustomerPortal,IsDeleted,IsPartner,Jigsaw,JigsawCompanyId,LastActivityDate,LastModifiedById,LastModifiedDate,LastReferencedDate,LastViewedDate,MasterRecordId,NaicsCode,NaicsDesc,Name,NumberOfEmployees,NumberofLocations__c,OwnerId,Ownership,ParentId,Phone,PhotoUrl,Rating,ShippingAddress,ShippingCity,ShippingCountry,ShippingLatitude,ShippingLongitude,ShippingPostalCode,ShippingState,ShippingStreet,Sic,SicDesc,Site,SLAExpirationDate__c,SLASerialNumber__c,SLA__c,SystemModstamp,TickerSymbol,Tradestyle,Type,UpsellOpportunity__c,Website,YearStarted FROM Account"; 
   org.query({ query: q, oauth: oauth }, function(err, resp) {
     //console.log(resp.records);
-    res.writeHead(200, { 'Content-Type': 'application/json', "Access-Control-Allow-Origin":"*" });
-    res.write(JSON.stringify(resp, 0, 4));
-    res.end();
+    if(err){
+      console.log('api/accounts has an error',err);  
+    }else{
+      res.writeHead(200, { 'Content-Type': 'application/json', "Access-Control-Allow-Origin":"*" });
+      res.write(JSON.stringify(resp, 0, 4));
+      res.end();
+    }
   });
 
 });

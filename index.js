@@ -2,7 +2,7 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var nforce = require('nforce');
 
-//will need to break this down a bit more
+
 
 var util = require('util')
 var async = require('async')
@@ -26,7 +26,7 @@ app.use(function (req, res, next) {
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
     res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
-    res.setHeader('Access-Control-Allow-Credentials', true);
+    //res.setHeader('Access-Control-Allow-Credentials', true);
     next();
 });
 

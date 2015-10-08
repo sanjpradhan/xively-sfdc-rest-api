@@ -13,7 +13,7 @@ router.get('/', function(req, res, next) {
     .then(function(results){
       res.render('index', { records: results.records });
     });
-
+    next();
 });
 
 /* Display new account form */
@@ -96,6 +96,8 @@ router.post('/:id', function(req, res, next) {
 
 
   /* SKP: REST API FOR Record  */
+
+  /*
 router.get('/account/:id', function(req, res, next) {
   // query for record, contacts and opportunities
   
@@ -108,12 +110,6 @@ router.get('/account/:id', function(req, res, next) {
     org.query({ query: "Select Id, Name, Email, Title, Phone From Contact where AccountId = '" + req.params.id + "'"}),
     org.query({ query: "Select Id, Name, StageName, Amount, Probability From Opportunity where AccountId = '" + req.params.id + "'"}),
     function(account, contacts, opportunities) {
-        /*
-        res.write('{ account : ' + JSON.stringify(account , 0 ,4) + ',');
-        res.write(' contacts : ' + JSON.stringify(contacts.records,0,4)  + ',');
-        res.write(' opportunities :' + JSON.stringify(opportunities.records,0,4) + '}');
-        */
-        //res.write('{ account : ' + JSON.stringify(account , 0 ,4) + ', contacts : ' + JSON.stringify(contacts.records,0,4) + ', opportunities : ' + JSON.stringify(opportunities.records,0,4) + '}');
         
         res.write('{ "account" : ' + JSON.stringify(account , 0 ,4) + ',');
         res.write('  "contacts" : ' + JSON.stringify(contacts.records,0,4)  + ',');
@@ -122,7 +118,7 @@ router.get('/account/:id', function(req, res, next) {
     });
     
 });
-
+*/
 
 /* SKP: REST API FOR Record  */
 router.get('/contact/:id', function(req, res, next) {

@@ -91,7 +91,7 @@ router.post('/:id', function(req, res, next) {
     .then(function(){
       res.redirect('/' + req.params.id);
     })
-   
+   next();
 });
 
 
@@ -117,7 +117,7 @@ router.get('/account/:accountId', function(req, res, next) {
     
 });
 
-router.get('/account/opportunities/accountId', function(req, res, next) {
+router.get('/account/opportunities/:accountId', function(req, res, next) {
   // query for record, contacts and opportunities
         console.log('ABOUT TO QUERY opportunities for account: ' + req.params.accountId);
         res.write('{ opportunities for  : ' + req.params.accountId + '}');

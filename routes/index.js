@@ -39,41 +39,6 @@ router.post('/', function(req, res, next) {
 
 
 
-/* SKP: REST API FOR Record  */
-router.get('/api/:account/:id', function(req, res, next) {
-  // query for record, contacts and opportunities
-  console.log('ABOUT TO QUERY ACCOUNTS, CONTACTS and OPPORTUNITIES FOR ' + req.params.id);
-  Promise.join(
-    org.getRecord({ type: 'account', id: req.params.id }),
-    org.query({ query: "Select Id, Name, Email, Title, Phone From Contact where AccountId = '" + req.params.id + "'"}),
-    org.query({ query: "Select Id, Name, StageName, Amount, Probability From Opportunity where AccountId = '" + req.params.id + "'"}),
-    function(account, contacts, opportunities) {
-        //res.render('show', { record: account, contacts: contacts.records, opps: opportunities.records });
-        //console.log(account);
-        //console.log(contacts.records);
-        //console.log(opportunities.records);
-        //console.log('done');
-      //res.writeHead(200, { 'Content-Type': 'application/json', "Access-Control-Allow-Origin":"*" });
-      //res.write(JSON.stringify(account, 0, 4));
-      //res.write(JSON.stringify(contacts, 0, 4));
-      //res.write(JSON.stringify(opportunities, 0, 4));
-      //res.end();
-        res.write('{ account : ' + JSON.stringify(account , 0 ,4) + '}');
-        res.write('{ contacts :' + JSON.stringify(contacts.records,0,4)  + '}');
-        res.write('{ opportunities :' + JSON.stringify(opportunities.records,0,4) + '}');
-        res.end();
-    });
-});
-
-
-/* SKP: REST API FOR Record  */
-router.get('/api/contact/:id', function(req, res, next) {
-  // query for record, contacts and opportunities
-        console.log('ABOUT TO QUERY CONTACTS: ' + req.params.id);
-        res.write('{ contact : ' + req.params.id + '}');
-        res.end();
-});
-
 
 
 /* Record detail page */
@@ -86,6 +51,7 @@ router.get('/:id', function(req, res, next) {
     function(account, contacts, opportunities) {
         res.render('show', { record: account, contacts: contacts.records, opps: opportunities.records });
     });
+    next();
 });
 
 /* Display record update form */
@@ -124,5 +90,47 @@ router.post('/:id', function(req, res, next) {
       res.redirect('/' + req.params.id);
     })
 });
+
+
+/* SKP: REST API FOR Record  */
+router.get('/api/:account/:id', function(req, res, next) {
+  // query for record, contacts and opportunities
+  console.log('ABOUT TO QUERY ACCOUNTS, CONTACTS and OPPORTUNITIES FOR ' + req.params.id);
+  Promise.join(
+    org.getRecord({ type: 'account', id: req.params.id }),
+    org.query({ query: "Select Id, Name, Email, Title, Phone From Contact where AccountId = '" + req.params.id + "'"}),
+    org.query({ query: "Select Id, Name, StageName, Amount, Probability From Opportunity where AccountId = '" + req.params.id + "'"}),
+    function(account, contacts, opportunities) {
+        //res.render('show', { record: account, contacts: contacts.records, opps: opportunities.records });
+        //console.log(account);
+        //console.log(contacts.records);
+        //console.log(opportunities.records);
+        //console.log('done');
+      //res.writeHead(200, { 'Content-Type': 'application/json', "Access-Control-Allow-Origin":"*" });
+      //res.write(JSON.stringify(account, 0, 4));
+      //res.write(JSON.stringify(contacts, 0, 4));
+      //res.write(JSON.stringify(opportunities, 0, 4));
+      //res.end();
+        res.write('{ account : ' + JSON.stringify(account , 0 ,4) + '}');
+        res.write('{ contacts :' + JSON.stringify(contacts.records,0,4)  + '}');
+        res.write('{ opportunities :' + JSON.stringify(opportunities.records,0,4) + '}');
+        res.end();
+    });
+    next();
+});
+
+
+/* SKP: REST API FOR Record  */
+router.get('api/contact/:id', function(req, res, next) {
+  // query for record, contacts and opportunities
+        console.log('ABOUT TO QUERY CONTACTS: ' + req.params.id);
+        res.write('{ contact : ' + req.params.id + '}');
+        res.end();
+        next();
+});
+
+
+
+
 
 module.exports = router;

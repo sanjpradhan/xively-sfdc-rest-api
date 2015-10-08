@@ -39,6 +39,34 @@ router.post('/', function(req, res, next) {
 
 
 
+/* SKP: REST API FOR Record  */
+router.get('/account/:id', function(req, res, next) {
+  // query for record, contacts and opportunities
+  
+  
+  console.log(req.params);
+  console.log('ABOUT TO QUERY ACCOUNTS, CONTACTS and OPPORTUNITIES FOR ' + req.params.id);
+  
+  Promise.join(
+    org.getRecord({ type: 'account', id: req.params.id }),
+    org.query({ query: "Select Id, Name, Email, Title, Phone From Contact where AccountId = '" + req.params.id + "'"}),
+    org.query({ query: "Select Id, Name, StageName, Amount, Probability From Opportunity where AccountId = '" + req.params.id + "'"}),
+    function(account, contacts, opportunities) {
+        /*
+        res.write('{ account : ' + JSON.stringify(account , 0 ,4) + ',');
+        res.write(' contacts : ' + JSON.stringify(contacts.records,0,4)  + ',');
+        res.write(' opportunities :' + JSON.stringify(opportunities.records,0,4) + '}');
+        */
+        //res.write('{ account : ' + JSON.stringify(account , 0 ,4) + ', contacts : ' + JSON.stringify(contacts.records,0,4) + ', opportunities : ' + JSON.stringify(opportunities.records,0,4) + '}');
+        
+        res.write('{ "account" : ' + JSON.stringify(account , 0 ,4) + ',');
+        res.write('  "contacts" : ' + JSON.stringify(contacts.records,0,4)  + ',');
+        res.write('  "opportunities" :' + JSON.stringify(opportunities.records,0,4) + '}');
+        res.end();
+    });
+    next();
+  
+});
 
 
 /* Record detail page */
@@ -95,34 +123,6 @@ router.post('/:id', function(req, res, next) {
 });
 
 
-/* SKP: REST API FOR Record  */
-router.get('/account/:id', function(req, res, next) {
-  // query for record, contacts and opportunities
-  
-  
-  console.log(req.params);
-  console.log('ABOUT TO QUERY ACCOUNTS, CONTACTS and OPPORTUNITIES FOR ' + req.params.id);
-  
-  Promise.join(
-    org.getRecord({ type: 'account', id: req.params.id }),
-    org.query({ query: "Select Id, Name, Email, Title, Phone From Contact where AccountId = '" + req.params.id + "'"}),
-    org.query({ query: "Select Id, Name, StageName, Amount, Probability From Opportunity where AccountId = '" + req.params.id + "'"}),
-    function(account, contacts, opportunities) {
-        /*
-        res.write('{ account : ' + JSON.stringify(account , 0 ,4) + ',');
-        res.write(' contacts : ' + JSON.stringify(contacts.records,0,4)  + ',');
-        res.write(' opportunities :' + JSON.stringify(opportunities.records,0,4) + '}');
-        */
-        //res.write('{ account : ' + JSON.stringify(account , 0 ,4) + ', contacts : ' + JSON.stringify(contacts.records,0,4) + ', opportunities : ' + JSON.stringify(opportunities.records,0,4) + '}');
-        
-        res.write('{ "account" : ' + JSON.stringify(account , 0 ,4) + ',');
-        res.write('  "contacts" : ' + JSON.stringify(contacts.records,0,4)  + ',');
-        res.write('  "opportunities" :' + JSON.stringify(opportunities.records,0,4) + '}');
-        res.end();
-    });
-    next();
-  
-});
 
 
 /* SKP: REST API FOR Record  */

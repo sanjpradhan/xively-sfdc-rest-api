@@ -100,6 +100,7 @@ router.get('/account/:id', function(req, res, next) {
   // query for record, contacts and opportunities
   
   console.log('REQUEST PARAMS : ' + req.params);
+  console.log(req.params);
   console.log('ABOUT TO QUERY ACCOUNTS, CONTACTS and OPPORTUNITIES FOR ' + req.params.id);
   /*
   Promise.join(

@@ -13,7 +13,6 @@ router.get('/', function(req, res, next) {
     .then(function(results){
       res.render('index', { records: results.records });
     });
-
 });
 
 /* Display new account form */
@@ -37,6 +36,61 @@ router.post('/', function(req, res, next) {
     })
 });
 
+
+
+
+/* Record detail page */
+router.get('/:id', function(req, res, next) {
+  // query for record, contacts and opportunities
+  Promise.join(
+    org.getRecord({ type: 'account', id: req.params.id }),
+    org.query({ query: "Select Id, Name, Email, Title, Phone From Contact where AccountId = '" + req.params.id + "'"}),
+    org.query({ query: "Select Id, Name, StageName, Amount, Probability From Opportunity where AccountId = '" + req.params.id + "'"}),
+    function(account, contacts, opportunities) {
+        res.render('show', { record: account, contacts: contacts.records, opps: opportunities.records });
+    });
+    
+});
+
+/* Display record update form */
+router.get('/:id/edit', function(req, res, next) {
+  org.getRecord({ id: req.params.id, type: 'Account'})
+    .then(function(account){
+      res.render('edit', { record: account });
+    });
+    
+});
+
+/* Display record update form */
+router.get('/:id/delete', function(req, res, next) {
+
+  var acc = nforce.createSObject('Account');
+  acc.set('Id', req.params.id);
+
+  org.delete({ sobject: acc })
+    .then(function(account){
+      res.redirect('/');
+    });
+    
+});
+
+/* Updates the record */
+router.post('/:id', function(req, res, next) {
+
+  var acc = nforce.createSObject('Account');
+  acc.set('Id', req.params.id);
+  acc.set('Name', req.body.name);
+  acc.set('Industry', req.body.industry);
+  acc.set('Type', req.body.type);
+  acc.set('AccountNumber', req.body.accountNumber);
+  acc.set('Description', req.body.description);
+
+  org.update({ sobject: acc })
+    .then(function(){
+      res.redirect('/' + req.params.id);
+    })
+   
+});
 
 
 /* SKP: REST API FOR Record  */
@@ -64,65 +118,9 @@ router.get('/account/:id', function(req, res, next) {
         res.write('  "opportunities" :' + JSON.stringify(opportunities.records,0,4) + '}');
         res.end();
     });
-    next();
+   
   
 });
-
-
-/* Record detail page */
-router.get('/:id', function(req, res, next) {
-  // query for record, contacts and opportunities
-  Promise.join(
-    org.getRecord({ type: 'account', id: req.params.id }),
-    org.query({ query: "Select Id, Name, Email, Title, Phone From Contact where AccountId = '" + req.params.id + "'"}),
-    org.query({ query: "Select Id, Name, StageName, Amount, Probability From Opportunity where AccountId = '" + req.params.id + "'"}),
-    function(account, contacts, opportunities) {
-        res.render('show', { record: account, contacts: contacts.records, opps: opportunities.records });
-    });
-    
-});
-
-/* Display record update form */
-router.get('/:id/edit', function(req, res, next) {
-  org.getRecord({ id: req.params.id, type: 'Account'})
-    .then(function(account){
-      res.render('edit', { record: account });
-    });
-  next();  
-});
-
-/* Display record update form */
-router.get('/:id/delete', function(req, res, next) {
-
-  var acc = nforce.createSObject('Account');
-  acc.set('Id', req.params.id);
-
-  org.delete({ sobject: acc })
-    .then(function(account){
-      res.redirect('/');
-    });
-  next();  
-});
-
-/* Updates the record */
-router.post('/:id', function(req, res, next) {
-
-  var acc = nforce.createSObject('Account');
-  acc.set('Id', req.params.id);
-  acc.set('Name', req.body.name);
-  acc.set('Industry', req.body.industry);
-  acc.set('Type', req.body.type);
-  acc.set('AccountNumber', req.body.accountNumber);
-  acc.set('Description', req.body.description);
-
-  org.update({ sobject: acc })
-    .then(function(){
-      res.redirect('/' + req.params.id);
-    })
-   next(); 
-});
-
-
 
 
 /* SKP: REST API FOR Record  */

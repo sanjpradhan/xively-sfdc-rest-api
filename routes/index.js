@@ -13,6 +13,7 @@ router.get('/', function(req, res, next) {
     .then(function(results){
       res.render('index', { records: results.records });
     });
+
 });
 
 /* Display new account form */
@@ -39,6 +40,7 @@ router.post('/', function(req, res, next) {
 
 
 
+
 /* Record detail page */
 router.get('/:id', function(req, res, next) {
   // query for record, contacts and opportunities
@@ -49,7 +51,7 @@ router.get('/:id', function(req, res, next) {
     function(account, contacts, opportunities) {
         res.render('show', { record: account, contacts: contacts.records, opps: opportunities.records });
     });
-    
+    next();
 });
 
 /* Display record update form */
@@ -58,7 +60,7 @@ router.get('/:id/edit', function(req, res, next) {
     .then(function(account){
       res.render('edit', { record: account });
     });
-    
+    next();  
 });
 
 /* Display record update form */
@@ -71,7 +73,7 @@ router.get('/:id/delete', function(req, res, next) {
     .then(function(account){
       res.redirect('/');
     });
-    
+    next();  
 });
 
 /* Updates the record */
@@ -89,7 +91,7 @@ router.post('/:id', function(req, res, next) {
     .then(function(){
       res.redirect('/' + req.params.id);
     })
-   
+   next(); 
 });
 
 
@@ -118,18 +120,17 @@ router.get('/account/:id', function(req, res, next) {
         res.write('  "opportunities" :' + JSON.stringify(opportunities.records,0,4) + '}');
         res.end();
     });
-   
-  
+    next();
 });
 
 
 /* SKP: REST API FOR Record  */
 router.get('/contact/:id', function(req, res, next) {
   // query for record, contacts and opportunities
-        console.log('ABOUT TO QUERY CONTACTS: ' + req.params.id);
-        res.write('{ contact : ' + req.params.id + '}');
-        res.end();
-        
+      console.log('ABOUT TO QUERY CONTACTS: ' + req.params.id);
+      res.write('{ contact : ' + req.params.id + '}');
+      res.end();
+      next();       
 });
 
 
@@ -139,6 +140,7 @@ router.get('/contact/:id/cases', function(req, res, next) {
         console.log('ABOUT TO QUERY CONTACTS OPEN CASES: ' + req.params.id);
         res.write('{ cases for  : ' + req.params.id + '}');
         res.end();
+        next();
 });
 
 

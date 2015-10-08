@@ -113,8 +113,10 @@ router.get('/account/:id', function(req, res, next) {
         res.write(' contacts : ' + JSON.stringify(contacts.records,0,4)  + ',');
         res.write(' opportunities :' + JSON.stringify(opportunities.records,0,4) + '}');
         */
-
-        res.write('{ account : ' + JSON.stringify(account , 0 ,4) + ', contacts : ' + JSON.stringify(contacts.records,0,4) + ', opportunities : ' + JSON.stringify(opportunities.records,0,4) + '}');
+        //res.write('{ account : ' + JSON.stringify(account , 0 ,4) + ', contacts : ' + JSON.stringify(contacts.records,0,4) + ', opportunities : ' + JSON.stringify(opportunities.records,0,4) + '}');
+        
+        res.write('{ contacts : ' + JSON.stringify(contacts.records,0,4)  + ',');
+        res.write(' opportunities :' + JSON.stringify(opportunities.records,0,4) + '}');
         res.end();
     });
   

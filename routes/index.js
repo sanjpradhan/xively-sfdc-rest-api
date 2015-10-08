@@ -91,7 +91,7 @@ router.post('/:id', function(req, res, next) {
     .then(function(){
       res.redirect('/' + req.params.id);
     })
-   next(); 
+   
 });
 
 

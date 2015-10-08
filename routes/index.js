@@ -120,6 +120,7 @@ router.get('/account/:id', function(req, res, next) {
         res.write('  "opportunities" :' + JSON.stringify(opportunities.records,0,4) + '}');
         res.end();
     });
+    next();
   
 });
 

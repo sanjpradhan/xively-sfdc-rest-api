@@ -108,9 +108,9 @@ router.get('/account/:id', function(req, res, next) {
     org.query({ query: "Select Id, Name, Email, Title, Phone From Contact where AccountId = '" + req.params.id + "'"}),
     org.query({ query: "Select Id, Name, StageName, Amount, Probability From Opportunity where AccountId = '" + req.params.id + "'"}),
     function(account, contacts, opportunities) {
-        res.write('{{ account : ' + JSON.stringify(account , 0 ,4) + '},');
-        res.write('{ contacts :' + JSON.stringify(contacts.records,0,4)  + '},');
-        res.write('{ opportunities :' + JSON.stringify(opportunities.records,0,4) + '}}');
+        res.write('{ account :[' + JSON.stringify(account , 0 ,4) + ']},');
+        res.write('{ contacts :[' + JSON.stringify(contacts.records,0,4)  + ']},');
+        res.write('{ opportunities :[' + JSON.stringify(opportunities.records,0,4) + ']}');
         res.end();
     });
   

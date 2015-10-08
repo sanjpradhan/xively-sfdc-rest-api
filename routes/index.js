@@ -1,3 +1,5 @@
+
+
 var express = require('express');
 var router = express.Router();
 
@@ -95,15 +97,6 @@ router.post('/:id', function(req, res, next) {
 
   /* SKP: REST API FOR Record  */
 
-router.get('/account/:accountId/opportunities', function(req, res, next) {
-  // query for record, contacts and opportunities
-        console.log('ABOUT TO QUERY opportunities for account: ' + req.params.accountId);
-        res.write('{ opportunities for  : ' + req.params.accountId + '}');
-        res.end();
-        next();
-});
-  
-
 
 router.get('/account/:accountId', function(req, res, next) {
   // query for record, contacts and opportunities
@@ -125,6 +118,18 @@ router.get('/account/:accountId', function(req, res, next) {
     next();
     
 });
+
+router.get('/account/:accountId/opportunities', function(req, res, next) {
+  // query for record, contacts and opportunities
+        console.log('ABOUT TO QUERY opportunities for account: ' + req.params.accountId);
+        res.write('{ opportunities for  : ' + req.params.accountId + '}');
+        res.end();
+        next();
+});
+  
+
+
+
 
 
 /* SKP: REST API FOR Record  */

@@ -50,7 +50,7 @@ router.get('/:id', function(req, res, next) {
     function(account, contacts, opportunities) {
         res.render('show', { record: account, contacts: contacts.records, opps: opportunities.records });
     });
-    next();
+    
 });
 
 /* Display record update form */

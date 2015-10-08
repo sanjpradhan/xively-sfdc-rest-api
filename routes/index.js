@@ -108,12 +108,12 @@ router.get('/account/:accountId', function(req, res, next) {
     org.query({ query: "Select Id, Name, Email, Title, Phone From Contact where AccountId = '" + req.params.accountId + "'"}),
     org.query({ query: "Select Id, Name, StageName, Amount, Probability From Opportunity where AccountId = '" + req.params.accountId + "'"}),
     function(account, contacts, opportunities) {
-        
         res.write('{ "account" : ' + JSON.stringify(account , 0 ,4) + ',');
         res.write('  "contacts" : ' + JSON.stringify(contacts.records,0,4)  + ',');
         res.write('  "opportunities" :' + JSON.stringify(opportunities.records,0,4) + '}');
         res.end();
     });
+    next();
     
 });
 
@@ -136,6 +136,12 @@ router.get('/contact/:contactId/cases', function(req, res, next) {
         
 });
 
-
+router.get('/account/:accountId/opportunities', function(req, res, next) {
+  // query for record, contacts and opportunities
+        console.log('ABOUT TO QUERY opportunities for account: ' + req.params.accountId);
+        res.write('{ opportunities for  : ' + req.params.acocountId + '}');
+        res.end();
+        
+});
 
 module.exports = router;

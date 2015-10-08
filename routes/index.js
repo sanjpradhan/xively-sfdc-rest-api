@@ -106,7 +106,7 @@ router.get('/account/:id', function(req, res, next) {
     function(account, contacts, opportunities) {
         //res.render('show', { record: account, contacts: contacts.records, opps: opportunities.records });
         //console.log(account);
-        //console.log(contacts.records);
+        console.log(contacts.records);
         //console.log(opportunities.records);
         //console.log('done');
       //res.writeHead(200, { 'Content-Type': 'application/json', "Access-Control-Allow-Origin":"*" });
@@ -115,8 +115,8 @@ router.get('/account/:id', function(req, res, next) {
       //res.write(JSON.stringify(opportunities, 0, 4));
       //res.end();
         res.write('{ account : ' + JSON.stringify(account , 0 ,4) + '}');
-        res.write('{ contacts :' + JSON.stringify(contacts.records,0,4)  + '}');
-        res.write('{ opportunities :' + JSON.stringify(opportunities.records,0,4) + '}');
+        //res.write('{ contacts :' + JSON.stringify(contacts.records,0,4)  + '}');
+        //res.write('{ opportunities :' + JSON.stringify(opportunities.records,0,4) + '}');
         res.end();
     });
     next();

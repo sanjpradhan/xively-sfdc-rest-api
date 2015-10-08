@@ -13,7 +13,6 @@ router.get('/', function(req, res, next) {
     .then(function(results){
       res.render('index', { records: results.records });
     });
-    next();
 });
 
 /* Display new account form */
@@ -59,8 +58,7 @@ router.get('/:id/edit', function(req, res, next) {
   org.getRecord({ id: req.params.id, type: 'Account'})
     .then(function(account){
       res.render('edit', { record: account });
-    });
-    next();  
+    }); 
 });
 
 /* Display record update form */
@@ -73,7 +71,7 @@ router.get('/:id/delete', function(req, res, next) {
     .then(function(account){
       res.redirect('/');
     });
-    next();  
+    
 });
 
 /* Updates the record */

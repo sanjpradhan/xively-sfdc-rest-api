@@ -95,18 +95,18 @@ router.post('/:id', function(req, res, next) {
 
   /* SKP: REST API FOR Record  */
 
-  /*
-router.get('/account/:id', function(req, res, next) {
+  
+router.get('/account/:accountId', function(req, res, next) {
   // query for record, contacts and opportunities
   
   
   console.log(req.params);
-  console.log('ABOUT TO QUERY ACCOUNTS, CONTACTS and OPPORTUNITIES FOR ' + req.params.id);
+  console.log('ABOUT TO QUERY ACCOUNTS, CONTACTS and OPPORTUNITIES FOR ' + req.params.accountId);
   
   Promise.join(
-    org.getRecord({ type: 'account', id: req.params.id }),
-    org.query({ query: "Select Id, Name, Email, Title, Phone From Contact where AccountId = '" + req.params.id + "'"}),
-    org.query({ query: "Select Id, Name, StageName, Amount, Probability From Opportunity where AccountId = '" + req.params.id + "'"}),
+    org.getRecord({ type: 'account', id: req.params.accountId }),
+    org.query({ query: "Select Id, Name, Email, Title, Phone From Contact where AccountId = '" + req.params.accountId + "'"}),
+    org.query({ query: "Select Id, Name, StageName, Amount, Probability From Opportunity where AccountId = '" + req.params.accountId + "'"}),
     function(account, contacts, opportunities) {
         
         res.write('{ "account" : ' + JSON.stringify(account , 0 ,4) + ',');
@@ -116,25 +116,24 @@ router.get('/account/:id', function(req, res, next) {
     });
     
 });
-*/
+
 
 /* SKP: REST API FOR Record  */
-router.get('/contact/:id', function(req, res, next) {
+router.get('/contact/:contactId', function(req, res, next) {
   // query for record, contacts and opportunities
-      console.log('ABOUT TO QUERY CONTACTS: ' + req.params.id);
-      res.write('{ contact : ' + req.params.id + '}');
+      console.log('ABOUT TO QUERY CONTACTS: ' + req.params.contactId);
+      res.write('{ contact : ' + req.params.contactId + '}');
       res.end();
-      next();       
 });
 
 
 /* SKP: REST API FOR Record  */
-router.get('/contact/:id/cases', function(req, res, next) {
+router.get('/contact/:contactId/cases', function(req, res, next) {
   // query for record, contacts and opportunities
-        console.log('ABOUT TO QUERY CONTACTS OPEN CASES: ' + req.params.id);
-        res.write('{ cases for  : ' + req.params.id + '}');
+        console.log('ABOUT TO QUERY CONTACTS OPEN CASES: ' + req.params.contactId);
+        res.write('{ cases for  : ' + req.params.contactId + '}');
         res.end();
-        next();
+        
 });
 
 

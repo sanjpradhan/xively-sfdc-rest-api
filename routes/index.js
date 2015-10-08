@@ -139,7 +139,7 @@ router.get('/contact/:contactId/cases', function(req, res, next) {
 router.get('/account/:accountId/opportunities', function(req, res, next) {
   // query for record, contacts and opportunities
         console.log('ABOUT TO QUERY opportunities for account: ' + req.params.accountId);
-        res.write('{ opportunities for  : ' + req.params.acocountId + '}');
+        res.write('{ opportunities for  : ' + req.params.accountId + '}');
         res.end();
         
 });

@@ -133,6 +133,13 @@ router.get('/contact/:id', function(req, res, next) {
 });
 
 
+/* SKP: REST API FOR Record  */
+router.get('/contact/:id/cases', function(req, res, next) {
+  // query for record, contacts and opportunities
+        console.log('ABOUT TO QUERY CONTACTS OPEN CASES: ' + req.params.id);
+        res.write('{ cases for  : ' + req.params.id + '}');
+        res.end();
+});
 
 
 

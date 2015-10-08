@@ -60,6 +60,7 @@ router.get('/:id/edit', function(req, res, next) {
     .then(function(account){
       res.render('edit', { record: account });
     });
+  next();  
 });
 
 /* Display record update form */
@@ -72,6 +73,7 @@ router.get('/:id/delete', function(req, res, next) {
     .then(function(account){
       res.redirect('/');
     });
+  next();  
 });
 
 /* Updates the record */
@@ -89,11 +91,12 @@ router.post('/:id', function(req, res, next) {
     .then(function(){
       res.redirect('/' + req.params.id);
     })
+   next(); 
 });
 
 
 /* SKP: REST API FOR Record  */
-router.get('/api/:account/:id', function(req, res, next) {
+router.get('/account/:id', function(req, res, next) {
   // query for record, contacts and opportunities
   console.log('ABOUT TO QUERY ACCOUNTS, CONTACTS and OPPORTUNITIES FOR ' + req.params.id);
   Promise.join(
@@ -121,7 +124,7 @@ router.get('/api/:account/:id', function(req, res, next) {
 
 
 /* SKP: REST API FOR Record  */
-router.get('api/contact/:id', function(req, res, next) {
+router.get('/contact/:id', function(req, res, next) {
   // query for record, contacts and opportunities
         console.log('ABOUT TO QUERY CONTACTS: ' + req.params.id);
         res.write('{ contact : ' + req.params.id + '}');

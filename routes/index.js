@@ -100,7 +100,7 @@ router.get('/account/:accountId/opportunities', function(req, res, next) {
         console.log('ABOUT TO QUERY opportunities for account: ' + req.params.accountId);
         res.write('{ opportunities for  : ' + req.params.accountId + '}');
         res.end();
-        
+        next();
 });
   
 

@@ -72,7 +72,6 @@ router.get('/api/:contact/:id', function(req, res, next) {
         console.log('ABOUT TO QUERY CONTACTS: ' + req.params.id);
         res.write('{ contact : ' + req.params.id + '}');
         res.end();
-    });
 });
 
 

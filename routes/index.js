@@ -95,7 +95,7 @@ router.post('/:id', function(req, res, next) {
 });
 
 
-/* SKP: REST API FOR Record  */
+  /* SKP: REST API FOR Record  */
 router.get('/account/:id', function(req, res, next) {
   // query for record, contacts and opportunities
   
@@ -120,7 +120,7 @@ router.get('/account/:id', function(req, res, next) {
         res.write('  "opportunities" :' + JSON.stringify(opportunities.records,0,4) + '}');
         res.end();
     });
-    next();
+    
 });
 
 

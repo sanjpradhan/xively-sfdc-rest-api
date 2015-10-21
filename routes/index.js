@@ -158,10 +158,10 @@ router.get('/xively/devices',function(req,res,next){
 });
 
 
-/*
+
 router.post('/xively/newstream', function(req, res, next) {
   
-  conso].log('ABOUT TO CREATE NEW XIVELYSTREAM RECORD');
+  console.log('ABOUT TO CREATE NEW XIVELYSTREAM RECORD');
   var xivelyDS = nforce.createSObject('XivelyStream');
   xivelyDS.set('DeviceId', req.body.deviceId);
   xivelyDS.set('ErrorCode', req.body.erorrCode);s
@@ -178,7 +178,7 @@ router.post('/xively/newstream', function(req, res, next) {
     })
 });
 
-*/
+
 
 
 module.exports = router;

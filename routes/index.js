@@ -157,7 +157,24 @@ router.get('/xively/devices',function(req,res,next){
        
 });
 
+router.post('/xively/newstream', function(req, res, next) {
+  
+  conso].log('ABOUT TO CREATE NEW XIVELYSTREAM RECORD');
+  var xivelyDS = nforce.createSObject('XivelyStream');
+  xivelyDS.set('DeviceId', req.body.deviceId);
+  xivelyDS.set('ErrorCode', req.body.erorrCode);s
+  xivelyDS.set('OrgId', req.body.orgId);
+  xivelyDS.set('Sensor', req.body.sensor);
+  xivelyDS.set('Value', req.body.val);
+  xivelyDS.set('Unit', req.body.unit);
 
+
+  org.insert({ sobject: xivelyDS })
+    .then(function(xivelyNewObject){
+      res.write('{ "XivelyStream" : ' + JSON.stringify(xivelyNewObject , 0 ,4) + '}');
+      res.end();  
+    })
+});
 
 
 module.exports = router;

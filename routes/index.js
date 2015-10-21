@@ -39,9 +39,6 @@ router.post('/', function(req, res, next) {
 });
 
 
-
-
-
 /* Record detail page */
 router.get('/:id', function(req, res, next) {
   // query for record, contacts and opportunities
@@ -126,11 +123,6 @@ router.get('/account/opportunities/:accId', function(req, res, next) {
 });
   
 
-
-
-
-
-/* SKP: REST API FOR Record  */
 router.get('/contact/:contactId', function(req, res, next) {
   // query for record, contacts and opportunities
       console.log('ABOUT TO QUERY CONTACTS: ' + req.params.contactId);
@@ -147,6 +139,17 @@ router.get('/contact/:contactId/cases', function(req, res, next) {
         res.end();
         
 });
+
+
+/** XIVELY SPECIFIC ROUTES **/
+
+router.get('/xively/devices',function(req,res,next){
+        console.log('ABOUT TO QUERY ALL XIVELY OBJECTS');
+        res.write('{ All Xively Objects }');
+        res.end();  
+});
+
+
 
 
 module.exports = router;

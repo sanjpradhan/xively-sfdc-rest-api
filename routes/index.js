@@ -176,6 +176,10 @@ router.post('/xively/newstream', function(req, res, next) {
       res.write('{ "XivelyStream" : ' + JSON.stringify(xivelyNewObject , 0 ,4) + '}');
       res.end();  
     })
+    .catch(function(errFn){
+      res.write(errFn);
+      res.end();
+    })
 });
 
 

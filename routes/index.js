@@ -144,8 +144,18 @@ router.get('/contact/:contactId/cases', function(req, res, next) {
 /** XIVELY SPECIFIC ROUTES **/
 
 router.get('/xively/devices',function(req,res,next){
+        
         console.log('ABOUT TO QUERY ALL XIVELY OBJECTS');
-        res.write('{ All Xively Objects }');
+
+        var qry = 'SELECT DeviceId__c, ErrorCode__c ,OrgId__c , Sensor__c, Unit__c, Value__c from XivelyStream__C';
+        
+        org.query({ query: qry })
+        .then(function(results){
+            res.write('{ "XivelyStreams" : ' + JSON.stringify(results , 0 ,4) + '}');
+        });
+
+        
+        //res.write('{ All Xively Objects }');
         res.end();  
 });
 

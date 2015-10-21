@@ -157,6 +157,8 @@ router.get('/xively/devices',function(req,res,next){
        
 });
 
+
+/*
 router.post('/xively/newstream', function(req, res, next) {
   
   conso].log('ABOUT TO CREATE NEW XIVELYSTREAM RECORD');
@@ -175,6 +177,8 @@ router.post('/xively/newstream', function(req, res, next) {
       res.end();  
     })
 });
+
+*/
 
 
 module.exports = router;

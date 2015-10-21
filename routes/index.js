@@ -147,7 +147,7 @@ router.get('/xively/devices',function(req,res,next){
         
         console.log('ABOUT TO QUERY ALL XIVELY OBJECTS');
 
-        var qry = 'SELECT DeviceId__c as DeviceId , ErrorCode__c ,OrgId__c , Sensor__c, Unit__c, Value__c from XivelyStream__C';
+        var qry = 'SELECT DeviceId__c, ErrorCode__c ,OrgId__c , Sensor__c, Unit__c, Value__c from XivelyStream__C';
         
         org.query({ query: qry })
         .then(function(results){

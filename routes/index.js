@@ -184,7 +184,7 @@ router.post('/xively/newstream', function(req, res, next) {
       res.end();  
     })
     .catch(function(error){
-      console.log('INSIDE ERROR HANDLER SECTION - CATCH');
+      console.log('INSIDE ERROR HANDLER SECTION - /xively/newstream');
       console.log(error);
       //res.write(error);
       //res.end();

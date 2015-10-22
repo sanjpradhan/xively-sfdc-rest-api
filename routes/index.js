@@ -171,11 +171,11 @@ router.post('/xively/newstream', function(req, res, next) {
   var xivelyDS = nforce.createSObject('XivelyStream__c');
   xivelyDS.set('Name', req.body.name);
   xivelyDS.set('DeviceId__c', req.body.deviceId);
-  xivelyDS.set('ErrorCode__c', req.body.erorrCode);s
+  xivelyDS.set('ErrorCode__c', req.body.erorrCode);
   xivelyDS.set('OrgId__c', req.body.orgId);
- // xivelyDS.set('Sensor__c', req.body.sensor);
- // xivelyDS.set('Value__c', req.body.val);
- // xivelyDS.set('Unit__c', req.body.unit);
+  xivelyDS.set('Sensor__c', req.body.sensor);
+  xivelyDS.set('Value__c', req.body.val);
+  xivelyDS.set('Unit__c', req.body.unit);
 
 
   org.insert({ sobject: xivelyDS })
@@ -184,6 +184,7 @@ router.post('/xively/newstream', function(req, res, next) {
       res.end();  
     })
     .catch(function(error){
+      console.log('INSIDE ERROR HANDLER SECTION - CATCH');
       console.log(error);
       //res.write(error);
       //res.end();

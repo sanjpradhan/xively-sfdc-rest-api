@@ -147,7 +147,7 @@ router.get('/xively/devices',function(req,res,next){
         
         console.log('ABOUT TO QUERY ALL XIVELY OBJECTS');
 
-        var qry = 'SELECT DeviceId__c, ErrorCode__c ,OrgId__c , Sensor__c, Unit__c, Value__c from XivelyStream__C';
+        var qry = 'SELECT DeviceId__c, ErrorCode__c ,OrgId__c , Sensor__c, Unit__c, Value__c, Action__c from XivelyStream__C';
         
         org.query({ query: qry })
         .then(function(results){
@@ -162,10 +162,7 @@ router.get('/xively/devices',function(req,res,next){
 router.post('/xively/newstream', function(req, res, next) {
   
   console.log('ABOUT TO CREATE NEW XIVELYSTREAM RECORD');
-
-  console.log('Form Value: deviceId ' + req.body.deviceId);
-  console.log('Form Value: orgId ' + req.body.orgId);
-  console.log('Form Value: name ' + req.body.name);
+  console.log(req.body);
 
 
   var xivelyDS = nforce.createSObject('XivelyStream__c');
@@ -174,8 +171,9 @@ router.post('/xively/newstream', function(req, res, next) {
   xivelyDS.set('ErrorCode__c', req.body.erorrCode);
   xivelyDS.set('OrgId__c', req.body.orgId);
   xivelyDS.set('Sensor__c', req.body.sensor);
-  xivelyDS.set('Value__c', req.body.val);
+  xivelyDS.set('Value__c', req.body.value);
   xivelyDS.set('Unit__c', req.body.unit);
+  xivelyDS.set('Action__c', req.body.action);
 
 
   org.insert({ sobject: xivelyDS })
@@ -186,8 +184,6 @@ router.post('/xively/newstream', function(req, res, next) {
     .catch(function(error){
       console.log('INSIDE ERROR HANDLER SECTION - /xively/newstream');
       console.log(error);
-      //res.write(error);
-      //res.end();
     })
     
 });

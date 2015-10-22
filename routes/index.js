@@ -166,13 +166,13 @@ router.post('/xively/newstream', function(req, res, next) {
   console.log(req.body);
 
 
-  var xivelyDS = nforce.createSObject('XivelyStream');
-  xivelyDS.set('DeviceId', req.body.deviceId);
-  xivelyDS.set('ErrorCode', req.body.erorrCode);s
-  xivelyDS.set('OrgId', req.body.orgId);
-  xivelyDS.set('Sensor', req.body.sensor);
-  xivelyDS.set('Value', req.body.val);
-  xivelyDS.set('Unit', req.body.unit);
+  var xivelyDS = nforce.createSObject('XivelyStream__C');
+  xivelyDS.set('DeviceId__c', req.body.deviceId);
+  xivelyDS.set('ErrorCode__c', req.body.erorrCode);s
+  xivelyDS.set('OrgId__c', req.body.orgId);
+  xivelyDS.set('Sensor__c', req.body.sensor);
+  xivelyDS.set('Value__c', req.body.val);
+  xivelyDS.set('Unit__c', req.body.unit);
 
 
   org.insert({ sobject: xivelyDS })

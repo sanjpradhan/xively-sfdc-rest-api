@@ -39,6 +39,10 @@ app.use(function(req, res, next) {
 
 // development error handler
 // will print stacktrace
+
+
+/*  SKP COMMENTED OUT TO TEST ERROR HANDING IN REST API AND  PROISE IMPLEMENTATION OF XIVELY POST REQUEST
+
 if (app.get('env') === 'development') {
   app.use(function(err, req, res, next) {
     res.status(err.status || 500);
@@ -58,6 +62,6 @@ app.use(function(err, req, res, next) {
     error: {}
   });
 });
-
+*/
 
 module.exports = app;

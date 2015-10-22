@@ -166,7 +166,8 @@ router.post('/xively/newstream', function(req, res, next) {
   console.log(req.body);
 
 
-  var xivelyDS = nforce.createSObject('XivelyStream__C');
+  var xivelyDS = nforce.createSObject('XivelyStream__c');
+  xivelyDS.set('Name ', 'AirSoPure300');
   xivelyDS.set('DeviceId__c', req.body.deviceId);
   xivelyDS.set('ErrorCode__c', req.body.erorrCode);s
   xivelyDS.set('OrgId__c', req.body.orgId);

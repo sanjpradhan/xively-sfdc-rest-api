@@ -179,7 +179,7 @@ router.post('/xively/newstream', function(req, res, next) {
 
 
   org.insert({ sobject: xivelyDS })
-    .then(function(xivelyNewObject,error){
+    .then(function(xivelyNewObject){
       console.log('INSIDE TEN BLOCK AND ERROR IS' + error);
       res.write('{ "XivelyStream" : ' + JSON.stringify(xivelyNewObject , 0 ,4) + '}');
       res.end();  
@@ -189,9 +189,7 @@ router.post('/xively/newstream', function(req, res, next) {
       res.write(err);
       res.end();
     })
-    .finally(function(error){
-      console.log(error);
-    }
+    
 });
 
 

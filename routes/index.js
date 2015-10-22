@@ -163,7 +163,9 @@ router.post('/xively/newstream', function(req, res, next) {
   
   console.log('ABOUT TO CREATE NEW XIVELYSTREAM RECORD');
 
-  console.log(req.body);
+  console.log('Form Value: deviceId ' + req.body.deviceId);
+  console.log('Form Value: orgId ' + req.body.orgId);
+  console.log('Form Value: name ' + req.body.name);
 
 
   var xivelyDS = nforce.createSObject('XivelyStream__c');

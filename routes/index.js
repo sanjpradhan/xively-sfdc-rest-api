@@ -179,7 +179,7 @@ router.post('/xively/newstream', function(req, res, next) {
 
 
   org.insert({ sobject: xivelyDS })
-    .then(function(xivelyNewObject){
+    .then(function(xivelyNewObject,err){
       res.write('{ "XivelyStream" : ' + JSON.stringify(xivelyNewObject , 0 ,4) + '}');
       res.end();  
     })

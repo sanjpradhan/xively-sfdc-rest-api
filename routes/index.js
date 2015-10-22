@@ -184,9 +184,9 @@ router.post('/xively/newstream', function(req, res, next) {
       res.write('{ "XivelyStream" : ' + JSON.stringify(xivelyNewObject , 0 ,4) + '}');
       res.end();  
     })
-    .error(function(error){
+    .catch(function(error){
       console.log('WE HAVE AN ERROR');
-      res.write(err);
+      res.write(error);
       res.end();
     })
     

@@ -8,6 +8,14 @@ var Promise = require("bluebird");
 var nforce = require('nforce');
 var org = require('../lib/connection');
 
+
+router.get('/', function(req, res, next) {
+    res.redirect('http://bbc.co.uk');
+    res.end();  
+  
+});
+
+
 /* home page. */
 router.get('/accounts', function(req, res, next) {
 

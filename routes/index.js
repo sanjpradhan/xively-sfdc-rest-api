@@ -10,14 +10,14 @@ var org = require('../lib/connection');
 
 
 router.get('/', function(req, res, next) {
-    res.redirect('/accounts');
+    res.redirect('/account');
     res.end();  
   
 });
 
 
 /* home page. */
-router.get('/accounts', function(req, res, next) {
+router.get('/account', function(req, res, next) {
 
   org.query({ query: "Select Id, Name, Type, Industry, Rating From Account Order By LastModifiedDate DESC" })
     .then(function(results){
@@ -26,10 +26,6 @@ router.get('/accounts', function(req, res, next) {
     });
 });
 
-/* Display new account form */
-router.get('/new', function(req, res, next) {
-  res.render('new');
-});
 
 /* Creates a new the record */
 router.post('/account/new', function(req, res, next) {
@@ -62,13 +58,7 @@ router.get('/:id', function(req, res, next) {
     
 });
 
-/* Display record update form */
-router.get('/:id/edit', function(req, res, next) {
-  org.getRecord({ id: req.params.id, type: 'Account'})
-    .then(function(account){
-      res.render('edit', { record: account });
-    }); 
-});
+
 
 /* Display record update form */
 router.get('/:id/delete', function(req, res, next) {
@@ -84,7 +74,7 @@ router.get('/:id/delete', function(req, res, next) {
 });
 
 /* Updates the record */
-router.post('/:id', function(req, res, next) {
+router.post('/account/:id', function(req, res, next) {
 
   var acc = nforce.createSObject('Account');
   acc.set('Id', req.params.id);
@@ -96,7 +86,7 @@ router.post('/:id', function(req, res, next) {
 
   org.update({ sobject: acc })
     .then(function(){
-      res.redirect('/' + req.params.id);
+      res.redirect('/account/' + req.params.id);
     })
    next();
 });
@@ -121,15 +111,17 @@ router.get('/account/:accountId', function(req, res, next) {
         res.end();
     });
   
-    
 });
 
 router.get('/account/opportunities/:accId', function(req, res, next) {
   // query for record, contacts and opportunities
         console.log('ABOUT TO QUERY opportunit ies for account: ' + req.params.accId);
-        res.write('{ opportunities for  : ' + req.params.accId + '}');
-        res.end();
-        next();
+        org.query({ query: "Select Id, Name, StageName, Amount, Probability From Opportunity where AccountId = '" + req.params.accId + "'"})
+        .then(function(opportunities){
+          res.write('{ "Opportunities" : ' + JSON.stringify(opportunities , 0 ,4) + '}');
+          res.end();  
+        }
+              
 });
   
 
@@ -138,16 +130,6 @@ router.get('/contact/:contactId', function(req, res, next) {
       console.log('ABOUT TO QUERY CONTACTS: ' + req.params.contactId);
       res.write('{ contact : ' + req.params.contactId + '}');
       res.end();
-});
-
-
-/* SKP: REST API FOR Record  */
-router.get('/contact/:contactId/cases', function(req, res, next) {
-  // query for record, contacts and opportunities
-        console.log('ABOUT TO QUERY CONTACTS OPEN CASES: ' + req.params.contactId);
-        res.write('{ cases for  : ' + req.params.contactId + '}');
-        res.end();
-        
 });
 
 

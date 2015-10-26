@@ -125,12 +125,6 @@ router.get('/account/:accId/opportunities', function(req, res, next) {
 });
   
 
-router.get('/contact/:contactId', function(req, res, next) {
-  // query for record, contacts and opportunities
-      console.log('ABOUT TO QUERY CONTACTS: ' + req.params.contactId);
-      res.write('{ contact : ' + req.params.contactId + '}');
-      res.end();
-});
 
 
 /** XIVELY SPECIFIC ROUTES **/
@@ -149,7 +143,12 @@ router.get('/xively/devices',function(req,res,next){
        
 });
 
-
+router.get('/account/:accId/devices', function(req, res, next) {
+  // query for record, contacts and opportunities
+      console.log('ABOUT TO QUERY ACCOUNT ASSSETS/DEVICES: ' + req.params.contactId);
+      res.write('{ Assets : ' + req.params.accId + '}');
+      res.end();
+});
 
 router.post('/xively/newstream', function(req, res, next) {
   

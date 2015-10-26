@@ -9,11 +9,12 @@ var nforce = require('nforce');
 var org = require('../lib/connection');
 
 /* home page. */
-router.get('/', function(req, res, next) {
+router.get('/accounts', function(req, res, next) {
 
   org.query({ query: "Select Id, Name, Type, Industry, Rating From Account Order By LastModifiedDate DESC" })
     .then(function(results){
-      res.render('index', { records: results.records });
+      res.write('{ "Accounts" : ' + JSON.stringify(results , 0 ,4) + '}');
+      res.end();  
     });
 });
 
@@ -23,7 +24,7 @@ router.get('/new', function(req, res, next) {
 });
 
 /* Creates a new the record */
-router.post('/', function(req, res, next) {
+router.post('/account/new', function(req, res, next) {
 
   var acc = nforce.createSObject('Account');
   acc.set('Name', req.body.name);
@@ -34,7 +35,8 @@ router.post('/', function(req, res, next) {
 
   org.insert({ sobject: acc })
     .then(function(account){
-      res.redirect('/' + account.id);
+      res.write('{ "AccountCreated" : ' + JSON.stringify(account , 0 ,4) + '}');
+      res.end(); 
     })
 });
 

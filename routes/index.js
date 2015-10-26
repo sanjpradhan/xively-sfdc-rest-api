@@ -114,13 +114,13 @@ router.get('/account/:accountId', function(req, res, next) {
 });
 
 router.get('/account/opportunities/:accId', function(req, res, next) {
-  // query for record, contacts and opportunities
+  // query for opportunities for accountid
         console.log('ABOUT TO QUERY opportunit ies for account: ' + req.params.accId);
         org.query({ query: "Select Id, Name, StageName, Amount, Probability From Opportunity where AccountId = '" + req.params.accId + "'"})
         .then(function(opportunities){
           res.write('{ "Opportunities" : ' + JSON.stringify(opportunities , 0 ,4) + '}');
           res.end();  
-        }
+        });
               
 });
   

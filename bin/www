@@ -5,7 +5,8 @@
  */
 
 var app = require('../app');
-var debug = require('debug')('node-nforce-demo-2:server');
+//var debug = require('debug')('node-nforce-demo-2:server');
+var debug = require('debug');
 var http = require('http');
 
 /**

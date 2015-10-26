@@ -10,7 +10,7 @@ var org = require('../lib/connection');
 
 
 router.get('/', function(req, res, next) {
-    res.redirect('http://bbc.co.uk');
+    res.redirect('/accounts');
     res.end();  
   
 });

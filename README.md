@@ -1,4 +1,4 @@
-# xively-sfdc-REST-API
+# Xively-SFDC-REST-API
 
 
 ## Contributors

@@ -16,7 +16,7 @@ router.get('/', function(req, res, next) {
 });
 
 
-/* home page. */
+/* SKP:: Get a list of your accounts for the Org. */
 router.get('/account', function(req, res, next) {
 
   org.query({ query: "Select Id, Name, Type, Industry, Rating From Account Order By LastModifiedDate DESC" })
@@ -43,22 +43,6 @@ router.post('/account/new', function(req, res, next) {
       res.end(); 
     })
 });
-
-
-/* Record detail page */
-router.get('/:id', function(req, res, next) {
-  // query for record, contacts and opportunities
-  Promise.join(
-    org.getRecord({ type: 'account', id: req.params.id }),
-    org.query({ query: "Select Id, Name, Email, Title, Phone From Contact where AccountId = '" + req.params.id + "'"}),
-    org.query({ query: "Select Id, Name, StageName, Amount, Probability From Opportunity where AccountId = '" + req.params.id + "'"}),
-    function(account, contacts, opportunities) {
-        res.render('show', { record: account, contacts: contacts.records, opps: opportunities.records });
-    });
-    
-});
-
-
 
 /* Display record update form */
 router.get('/:id/delete', function(req, res, next) {
@@ -118,13 +102,22 @@ router.get('/account/:accId/opportunities', function(req, res, next) {
         console.log('ABOUT TO QUERY opportunit ies for account: ' + req.params.accId);
         org.query({ query: "Select Id, Name, StageName, Amount, Probability From Opportunity where AccountId = '" + req.params.accId + "'"})
         .then(function(opportunities){
-          res.write('{ "Opportunities" : ' + JSON.stringify(opportunities , 0 ,4) + '}');
+          res.write('{ "opportunities" : ' + JSON.stringify(opportunities , 0 ,4) + '}');
           res.end();  
         });
               
 });
   
-
+router.get('/account/:accId/contacts', function(req, res, next) {
+  // query for opportunities for accountid
+        console.log('ABOUT TO QUERY Contacts for Account: ' + req.params.accId);
+        org.query({ query: "Select Id, Name, Email, Title, Phone From Contact where AccountId = '" + req.params.accId + "'"})
+        .then(function(contacts){
+          res.write('{ "contacts" : ' + JSON.stringify(contacts , 0 ,4) + '}');
+          res.end();  
+        });
+              
+});
 
 
 /** XIVELY SPECIFIC ROUTES **/
